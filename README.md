@@ -1,5 +1,5 @@
-# tecnicaltest
-tecnical test capitole
+# tecnical test
+
 This project is a practical example of developing a REST API following a Hexagonal Architecture.
 
 ### Required Technologies
