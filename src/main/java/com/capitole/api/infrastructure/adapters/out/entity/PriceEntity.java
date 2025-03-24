@@ -1,25 +1,32 @@
-package com.capitole.api.domain.model;
+package com.capitole.api.infrastructure.adapters.out.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class PriceProduct {
+@Entity
+@Table(name = "price")
+public class PriceEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-private Long brandId;
-private Date StartDate;
-private Date endDate;
-private Long priceList;
-private Long productId;
-private Long priority;
-private BigDecimal price;
-private String curr;
+    private Long brandId;
+    private Date startDate;
+    private Date endDate;
+    private Long priceList;
+    private Long productId;
+    private Long priority;
+    private Long price;
+    private String curr;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getBrandId() {
         return brandId;
@@ -30,11 +37,11 @@ private String curr;
     }
 
     public Date getStartDate() {
-        return StartDate;
+        return startDate;
     }
 
     public void setStartDate(Date startDate) {
-        StartDate = startDate;
+        this.startDate = startDate;
     }
 
     public Date getEndDate() {
@@ -69,11 +76,11 @@ private String curr;
         this.priority = priority;
     }
 
-    public BigDecimal getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
