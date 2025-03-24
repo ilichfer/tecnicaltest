@@ -4,11 +4,14 @@ import com.capitole.api.aplication.ports.in.PriceServicePort;
 import com.capitole.api.aplication.ports.out.PricePersistencePort;
 import com.capitole.api.domain.exception.PriceException;
 import com.capitole.api.domain.model.PriceProduct;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
+@Service
 public class PricingUseCase implements PriceServicePort{
 
     private final PricePersistencePort pricePersistencePort;
@@ -18,7 +21,7 @@ public class PricingUseCase implements PriceServicePort{
     }
 
     @Override
-    public PriceProduct findApplicablePrice(LocalDateTime aplicationDate, Long productId, Long brandID) {
+    public PriceProduct findApplicablePrice(Date aplicationDate, Long productId, Long brandID) {
         List<PriceProduct> listPrices=  pricePersistencePort.findApplicablePrice(aplicationDate,productId,brandID);
         PriceProduct priorityPrice = listPrices.stream()
                 .max(Comparator.comparing(PriceProduct::getPriceList))
