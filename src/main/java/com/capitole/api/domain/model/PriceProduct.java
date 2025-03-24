@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -13,13 +14,14 @@ import java.util.Date;
 public class PriceProduct {
 
 private Long brandId;
-private Date StartDate;
-private Date endDate;
+private LocalDateTime StartDate;
+private LocalDateTime endDate;
 private Long priceList;
 private Long productId;
 private Long priority;
 private BigDecimal price;
 private String curr;
+private LocalDateTime applicationDate;
 
     public Long getBrandId() {
         return brandId;
@@ -29,19 +31,19 @@ private String curr;
         this.brandId = brandId;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return StartDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         StartDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
@@ -83,5 +85,13 @@ private String curr;
 
     public void setCurr(String curr) {
         this.curr = curr;
+    }
+
+    public LocalDateTime getApplicationDate() {
+        return applicationDate;
+    }
+
+    public void setApplicationDate(LocalDateTime applicationDate) {
+        this.applicationDate = applicationDate;
     }
 }

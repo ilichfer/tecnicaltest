@@ -19,7 +19,7 @@ public interface PriceRepository extends JpaRepository<PriceEntity, Long> {
 List<PriceEntity> findByProductIdAndBrandIdAndDateBetween(
     @Param("productId") Long productId,
     @Param("brandId") Long brandId,
-    @Param("aplicationDate") Date aplicationDate
+    @Param("aplicationDate") LocalDateTime aplicationDate
 );
 
 }

@@ -1,13 +1,14 @@
 package com.capitole.api.infrastructure.adapters.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class PriceResponse {
     private Long productId;
     private Long brandId;
     private Long priceList;
-    private Date applicationDate;
-    private Date endDate;
+    private LocalDateTime applicationDate;
+    private LocalDateTime endDate;
 
     public Long getProductId() {
         return productId;
@@ -33,19 +34,19 @@ public class PriceResponse {
         this.priceList = priceList;
     }
 
-    public Date getApplicationDate() {
+    public LocalDateTime getApplicationDate() {
         return applicationDate;
     }
 
-    public void setApplicationDate(Date applicationDate) {
+    public void setApplicationDate(LocalDateTime applicationDate) {
         this.applicationDate = applicationDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 }

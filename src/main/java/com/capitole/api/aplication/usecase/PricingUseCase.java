@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,11 +20,12 @@ public class PricingUseCase implements PriceServicePort{
     }
 
     @Override
-    public PriceProduct findApplicablePrice(Date aplicationDate, Long productId, Long brandID) {
+    public PriceProduct findApplicablePrice(LocalDateTime aplicationDate, Long productId, Long brandID) {
         List<PriceProduct> listPrices=  pricePersistencePort.findApplicablePrice(aplicationDate,productId,brandID);
         PriceProduct priorityPrice = listPrices.stream()
                 .max(Comparator.comparing(PriceProduct::getPriceList))
                 .orElseThrow(PriceException::new);
+        priorityPrice.setApplicationDate(aplicationDate);
         return priorityPrice;
     }
 }

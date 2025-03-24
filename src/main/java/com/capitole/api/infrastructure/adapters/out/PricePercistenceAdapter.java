@@ -22,7 +22,7 @@ public class PricePercistenceAdapter implements PricePersistencePort {
     }
 
     @Override
-    public List<PriceProduct> findApplicablePrice(Date aplicationDate, Long productId, Long BrandId) {
+    public List<PriceProduct> findApplicablePrice(LocalDateTime aplicationDate, Long productId, Long BrandId) {
         return priceMapper.listEntityToListPriceProduct( priceRepository.findByProductIdAndBrandIdAndDateBetween(productId,BrandId,aplicationDate));
     }
 }

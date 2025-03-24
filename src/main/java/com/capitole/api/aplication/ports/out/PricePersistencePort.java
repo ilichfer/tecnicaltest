@@ -7,5 +7,5 @@ import java.util.Date;
 import java.util.List;
 
 public interface PricePersistencePort {
-    List<PriceProduct> findApplicablePrice(Date aplicationDate, Long productId, Long BrandId);
+    List<PriceProduct> findApplicablePrice(LocalDateTime aplicationDate, Long productId, Long BrandId);
 }

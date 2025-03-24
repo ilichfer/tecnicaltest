@@ -27,7 +27,7 @@ public class PriceController {
     }
 
     @GetMapping("/v1/api")
-    public ResponseEntity<PriceResponse> getApplicablePrice(@RequestParam("applicationDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date applicationDate,
+    public ResponseEntity<PriceResponse> getApplicablePrice(@RequestParam("applicationDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime applicationDate,
                                                             @RequestParam("productId") Long productId,
                                                             @RequestParam("brandId") Long brandId) {
         return ResponseEntity.ok(priceRestMapper.priceToPriceResponse(priceServicePort.findApplicablePrice(applicationDate,productId,brandId)));
