@@ -1,9 +1,9 @@
-# tecnical test
+# technical test
 
 This project is a practical example of developing a REST API following a Hexagonal Architecture.
 
 ### Required Technologies
-`Java` `Maven`
+`Java 17` `Maven`
 
 ### :wrench: Configuration
 1. Persistence bean & context
