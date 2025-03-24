@@ -1,27 +1,35 @@
 package com.capitole.api.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
+import lombok.Builder;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Builder
 public class PriceProduct {
 
-private Long brandId;
-private LocalDateTime StartDate;
-private LocalDateTime endDate;
-private Long priceList;
-private Long productId;
-private Long priority;
-private BigDecimal price;
-private String curr;
-private LocalDateTime applicationDate;
+    private Long productId;
+    private Long brandId;
+    private Long priceList;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private BigDecimal price;
+    private Long priority;
+
+
+    public PriceProduct() {
+    }
+
+    public PriceProduct(Long productId, Long brandId, Long priceList, LocalDateTime startDate, LocalDateTime endDate, BigDecimal price, Long priority) {
+        this.productId = productId;
+        this.brandId = brandId;
+        this.priceList = priceList;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.price = price;
+        this.priority = priority;
+    }
 
     public Long getBrandId() {
         return brandId;
@@ -32,11 +40,11 @@ private LocalDateTime applicationDate;
     }
 
     public LocalDateTime getStartDate() {
-        return StartDate;
+        return startDate;
     }
 
     public void setStartDate(LocalDateTime startDate) {
-        StartDate = startDate;
+        this.startDate = startDate;
     }
 
     public LocalDateTime getEndDate() {
@@ -79,19 +87,6 @@ private LocalDateTime applicationDate;
         this.price = price;
     }
 
-    public String getCurr() {
-        return curr;
-    }
 
-    public void setCurr(String curr) {
-        this.curr = curr;
-    }
 
-    public LocalDateTime getApplicationDate() {
-        return applicationDate;
-    }
-
-    public void setApplicationDate(LocalDateTime applicationDate) {
-        this.applicationDate = applicationDate;
-    }
 }

@@ -2,8 +2,8 @@ package com.capitole.api.infrastructure.adapters.out.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "price")
@@ -18,7 +18,8 @@ public class PriceEntity {
     private Long priceList;
     private Long productId;
     private Long priority;
-    private Long price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
     private String curr;
 
     public Long getId() {
@@ -77,11 +78,11 @@ public class PriceEntity {
         this.priority = priority;
     }
 
-    public Long getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

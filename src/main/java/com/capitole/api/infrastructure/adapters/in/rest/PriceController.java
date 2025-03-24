@@ -4,7 +4,6 @@ import com.capitole.api.aplication.ports.in.PriceServicePort;
 import com.capitole.api.infrastructure.adapters.in.rest.mapper.PriceRestMapper;
 import com.capitole.api.infrastructure.adapters.model.PriceResponse;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/price")

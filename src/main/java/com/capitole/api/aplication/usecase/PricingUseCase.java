@@ -22,10 +22,8 @@ public class PricingUseCase implements PriceServicePort{
     @Override
     public PriceProduct findApplicablePrice(LocalDateTime aplicationDate, Long productId, Long brandID) {
         List<PriceProduct> listPrices=  pricePersistencePort.findApplicablePrice(aplicationDate,productId,brandID);
-        PriceProduct priorityPrice = listPrices.stream()
+        return listPrices.stream()
                 .max(Comparator.comparing(PriceProduct::getPriceList))
                 .orElseThrow(PriceException::new);
-        priorityPrice.setApplicationDate(aplicationDate);
-        return priorityPrice;
     }
 }

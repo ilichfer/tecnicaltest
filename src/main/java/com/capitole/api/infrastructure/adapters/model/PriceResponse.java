@@ -1,14 +1,46 @@
 package com.capitole.api.infrastructure.adapters.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 public class PriceResponse {
     private Long productId;
     private Long brandId;
     private Long priceList;
-    private LocalDateTime applicationDate;
+    private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private BigDecimal price;
+
+    public PriceResponse() {
+    }
+
+    public PriceResponse(Long productId, Long brandId, Long priceList, LocalDateTime startDate, LocalDateTime endDate, BigDecimal price) {
+        this.productId = productId;
+        this.brandId = brandId;
+        this.priceList = priceList;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.price = price;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+
 
     public Long getProductId() {
         return productId;
@@ -32,14 +64,6 @@ public class PriceResponse {
 
     public void setPriceList(Long priceList) {
         this.priceList = priceList;
-    }
-
-    public LocalDateTime getApplicationDate() {
-        return applicationDate;
-    }
-
-    public void setApplicationDate(LocalDateTime applicationDate) {
-        this.applicationDate = applicationDate;
     }
 
     public LocalDateTime getEndDate() {

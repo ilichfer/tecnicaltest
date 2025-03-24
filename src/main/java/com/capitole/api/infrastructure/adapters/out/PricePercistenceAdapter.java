@@ -7,7 +7,6 @@ import com.capitole.api.infrastructure.adapters.out.repository.PriceRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -22,7 +21,7 @@ public class PricePercistenceAdapter implements PricePersistencePort {
     }
 
     @Override
-    public List<PriceProduct> findApplicablePrice(LocalDateTime aplicationDate, Long productId, Long BrandId) {
-        return priceMapper.listEntityToListPriceProduct( priceRepository.findByProductIdAndBrandIdAndDateBetween(productId,BrandId,aplicationDate));
+    public List<PriceProduct> findApplicablePrice(LocalDateTime aplicationDate, Long productId, Long brandId) {
+        return priceMapper.listEntityToListPriceProduct( priceRepository.findByProductIdAndBrandIdAndDateBetween(productId,brandId,aplicationDate));
     }
 }
