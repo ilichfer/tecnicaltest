@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,15 +18,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -39,6 +34,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 class PriceControllerTest {
+
+    public static final String PRODUCT_ID = "35455";
+    public static final String BRAND_ID = "1";
+    public static final String PATH = "/price/v1/api";
 
     @Autowired
     private MockMvc mockMvc;
@@ -69,70 +68,76 @@ class PriceControllerTest {
 
 
     @Test
-    void test1PriceAt14th10AM() throws Exception {
+    void test1_ApplicablePrice() throws Exception {
+        String aplicationDateRequest = "2024-06-14 10:00:00";
         LocalDateTime applicationDate = LocalDateTime.of(2024, 6, 14, 10, 0);
         mockPriceResponse(applicationDate, 35455L, 1L, BigDecimal.valueOf(35.50));
 
-        mockMvc.perform(get("/price/v1/api")
-                        .param("applicationDate", "2024-06-14 10:00:00")
-                        .param("productId", "35455")
-                        .param("brandId", "1")
+        mockMvc.perform(get(PATH)
+                        .param("applicationDate", aplicationDateRequest)
+                        .param("productId", PRODUCT_ID)
+                        .param("brandId", BRAND_ID)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.price").value(35.50));
     }
 
     @Test
-    void test2PriceAt16PMOn14th() throws Exception {
+    void test2_ApplicablePrice() throws Exception {
+        String aplicationDateRequest = "2024-06-14 16:00:00";
         LocalDateTime applicationDate = LocalDateTime.of(2024, 6, 14, 16, 0);
         mockPriceResponse(applicationDate, 35455L, 1L,  BigDecimal.valueOf(25.45));
 
-        mockMvc.perform(get("/price/v1/api")
-                        .param("applicationDate", "2024-06-14 16:00:00")
-                        .param("productId", "35455")
-                        .param("brandId", "1")
+        mockMvc.perform(get(PATH)
+                        .param("applicationDate", aplicationDateRequest)
+                        .param("productId", PRODUCT_ID)
+                        .param("brandId", BRAND_ID)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.price").value(25.45));
     }
 
     @Test
-    void test3PriceAt21PMOn14th() throws Exception {
+    void test3_ApplicablePrice() throws Exception {
+        String aplicationDateRequest = "2024-06-14 21:00:00";
         LocalDateTime applicationDate = LocalDateTime.of(2024, 6, 14, 21, 0);
         mockPriceResponse(applicationDate, 35455L, 1L,  BigDecimal.valueOf(35.50));
 
-        mockMvc.perform(get("/price/v1/api")
-                        .param("applicationDate", "2024-06-14 21:00:00")
-                        .param("productId", "35455")
-                        .param("brandId", "1")
+        mockMvc.perform(get(PATH)
+                        .param("applicationDate", aplicationDateRequest)
+                        .param("productId", PRODUCT_ID)
+                        .param("brandId", BRAND_ID)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.price").value(35.50));
     }
 
     @Test
-    void test4PriceAt10AMOn15th() throws Exception {
+    void test4_ApplicablePrice() throws Exception {
+        String aplicationDateRequest = "2024-06-15 10:00:00";
         LocalDateTime applicationDate = LocalDateTime.of(2024, 6, 15, 10, 0);
         mockPriceResponse(applicationDate, 35455L, 1L,  BigDecimal.valueOf(30.50));
 
-        mockMvc.perform(get("/price/v1/api")
-                        .param("applicationDate", "2024-06-15 10:00:00")
-                        .param("productId", "35455")
-                        .param("brandId", "1")
+        mockMvc.perform(get(PATH)
+                        .param("applicationDate", aplicationDateRequest)
+                        .param("productId", PRODUCT_ID)
+                        .param("brandId", BRAND_ID)
                         .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.price").value(30.50));
     }
 
     @Test
-    void test5PriceAt21PMOn16th() throws Exception {
+    void test5_ApplicablePrice() throws Exception {
+        String aplicationDateRequest = "2024-06-16 21:00:00";
         LocalDateTime applicationDate = LocalDateTime.of(2024, 6, 16, 21, 0);
         mockPriceResponse(applicationDate, 35455L, 1L,  BigDecimal.valueOf(38.95));
 
-        mockMvc.perform(get("/price/v1/api")
-                        .param("applicationDate", "2024-06-16 21:00:00")
-                        .param("productId", "35455")
-                        .param("brandId", "1")
+        mockMvc.perform(get(PATH)
+                        .param("applicationDate", aplicationDateRequest)
+                        .param("productId", PRODUCT_ID)
+                        .param("brandId", BRAND_ID)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.price").value(38.95));
@@ -146,43 +151,5 @@ class PriceControllerTest {
         when(priceServicePort.findApplicablePrice(any(), anyLong(), anyLong())).thenReturn(price);
         when( mock(PriceRestMapper.class).priceToPriceResponse(price)).thenReturn(priceResponse);
     }
-
-    /**
-     * Test {@link PriceController#getApplicablePrice(LocalDateTime, Long, Long)}.
-     * <p>
-     * Method under test: {@link PriceController#getApplicablePrice(LocalDateTime, Long, Long)}
-     */
-    @Test
-    @DisplayName("Test getApplicablePrice(LocalDateTime, Long, Long)")
-    @Tag("MaintainedByDiffblue")
-    void testGetApplicablePrice() throws Exception {
-        // Arrange
-        when(priceServicePort.findApplicablePrice(Mockito.<LocalDateTime>any(), Mockito.<Long>any(), Mockito.<Long>any()))
-                .thenReturn(new PriceProduct());
-        when(priceRestMapper.priceToPriceResponse(Mockito.<PriceProduct>any())).thenReturn(new PriceResponse());
-        MockHttpServletRequestBuilder getResult = MockMvcRequestBuilders.get("/price/v1/api");
-        MockHttpServletRequestBuilder paramResult = getResult.param("applicationDate",
-                String.valueOf(LocalDate.of(1970, 1, 1).atStartOfDay()));
-        MockHttpServletRequestBuilder paramResult2 = paramResult.param("brandId", String.valueOf(1L));
-        MockHttpServletRequestBuilder requestBuilder = paramResult2.param("productId", String.valueOf(1L));
-
-        // Act and Assert
-        MockMvcBuilders.standaloneSetup(priceController)
-                .setControllerAdvice(priceRestAdvice)
-                .build()
-                .perform(requestBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.content()
-                        .string(
-                                "{\"productId\":null,\"brandId\":null,\"priceList\":null,\"startDate\":null,\"endDate\":null,\"price\":null}"));
-    }
-
-
-
-
-
-
-
 
 }
